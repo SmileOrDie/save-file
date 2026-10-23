@@ -1,0 +1,38 @@
+# TEMPLATE ONLY. Do not apply until node name and disk mount are confirmed.
+# Create a dedicated directory on the confirmed mounted filesystem before using this PV.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: save-documents-local
+spec:
+  capacity:
+    storage: REPLACE_WITH_REAL_CAPACITY
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: save-local-manual
+  local:
+    path: REPLACE_WITH_CONFIRMED_PATH
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - REPLACE_WITH_EXACT_KUBERNETES_NODE_NAME
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: save-documents
+  namespace: save
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: save-local-manual
+  resources:
+    requests:
+      storage: REPLACE_WITH_REAL_CAPACITY
+  volumeName: save-documents-local

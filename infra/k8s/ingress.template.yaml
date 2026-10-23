@@ -1,0 +1,36 @@
+# TEMPLATE ONLY. Verify DNS records and cert-manager ClusterIssuer before applying.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: save
+  namespace: save
+  annotations:
+    cert-manager.io/cluster-issuer: REPLACE_WITH_EXISTING_CLUSTER_ISSUER
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - save.shamdani.fr
+        - api-save.shamdani.fr
+      secretName: save-tls
+  rules:
+    - host: save.shamdani.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: save-frontend
+                port:
+                  number: 8080
+    - host: api-save.shamdani.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: save-backend
+                port:
+                  number: 3000

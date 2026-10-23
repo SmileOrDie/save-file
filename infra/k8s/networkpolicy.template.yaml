@@ -1,0 +1,21 @@
+# OPTIONAL TEMPLATE. Verify your k3s CNI enforces NetworkPolicy before relying on this.
+# This policy allows backend -> PostgreSQL only. Add ingress-controller access explicitly
+# after confirming the namespace and labels used by your Traefik deployment.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: save-postgres-ingress
+  namespace: save
+spec:
+  podSelector:
+    matchLabels:
+      app: save-postgres
+  policyTypes: ["Ingress"]
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: save-backend
+      ports:
+        - protocol: TCP
+          port: 5432

@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Save",
+    "slug": "save",
+    "scheme": "save",
+    "version": "0.1.0",
+    "orientation": "default",
+    "userInterfaceStyle": "automatic",
+    "web": {
+      "bundler": "metro",
+      "name": "Save",
+      "shortName": "Save"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

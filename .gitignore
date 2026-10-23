@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+web-build/
+coverage/
+*.tsbuildinfo
+
+# Expo
+.expo/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Local OS/editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Private keys and certificates
+*.pem
+*.key
+
+# Local Kubernetes secret manifests
+secrets.yaml
+secrets.yml
+*-secret.yaml
+*-secret.yml
